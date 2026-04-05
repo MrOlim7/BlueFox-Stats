@@ -1,64 +1,67 @@
 {
   "manifest_version": 3,
-  "name": "__MSG_extName__",
-  "description": "__MSG_extDescription__",
+  "name": "BlueFox Stats",
   "version": "0.1",
+  "description": "Améliorez votre expérience YouTube avec des statistiques avancées, miniatures, dislikes et assistant IA | Enhance YouTube with advanced stats, thumbnails, dislikes & AI assistant",
   "default_locale": "fr",
+  "icons": {
+    "16": "assets/icons/icon16.png",
+    "32": "assets/icons/icon32.png",
+    "48": "assets/icons/icon48.png",
+    "128": "assets/icons/icon128.png"
+  },
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "16": "assets/icons/icon16.png",
+      "32": "assets/icons/icon32.png",
+      "48": "assets/icons/icon48.png",
+      "128": "assets/icons/icon128.png"
+    },
+    "default_title": "BlueFox Stats v0.1"
+  },
   "permissions": [
     "activeTab",
     "storage",
+    "contextMenus",
     "tabs"
   ],
   "host_permissions": [
-    "https://www.youtube.com/*",
-    "https://youtube.com/*",
+    "*://*.youtube.com/*",
+    "https://www.googleapis.com/*",
     "https://returnyoutubedislikeapi.com/*",
-    "https://img.youtube.com/*",
     "https://i.ytimg.com/*",
-    "https://yt3.ggpht.com/*",
-    "https://web.archive.org/*",
-    "https://noembed.com/*"
+    "https://yt3.ggpht.com/*"
   ],
   "background": {
-    "service_worker": "background.js"
+    "service_worker": "background/background.js",
+    "type": "module"
   },
   "content_scripts": [
     {
-      "matches": ["https://www.youtube.com/*"],
+      "matches": ["*://*.youtube.com/*"],
       "css": ["styles/content.css"],
       "js": [
-        "utils/i18n.js",
         "utils/helpers.js",
         "utils/api.js",
-        "components/viewsGraph.js",
+        "components/statsPanel.js",
         "components/thumbnailViewer.js",
-        "components/dislikeCounter.js",
-        "components/channelStats.js",
-        "components/videoStats.js",
+        "components/channelAnalyzer.js",
         "components/seoAnalyzer.js",
         "components/aiAssistant.js",
-        "content.js"
+        "content/content.js"
       ],
       "run_at": "document_idle"
     }
   ],
-  "action": {
-    "default_popup": "popup/popup.html",
-    "default_icon": {
-      "16": "icons/icon16.png",
-      "48": "icons/icon48.png",
-      "128": "icons/icon128.png"
-    }
-  },
-  "icons": {
-    "16": "icons/icon16.png",
-    "48": "icons/icon48.png",
-    "128": "icons/icon128.png"
-  },
   "web_accessible_resources": [
     {
-      "resources": ["icons/*", "styles/*"],
-      "matches": ["https://www.youtube.com/*"]
+      "resources": [
+        "assets/icons/*",
+        "assets/images/*",
+        "styles/*"
+      ],
+      "matches": ["*://*.youtube.com/*"]
     }
   ]
 }

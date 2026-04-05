@@ -1,197 +1,48 @@
 {
-  "extName": {
-    "message": "BlueFox Stats v0.1"
-  },
-  "extDescription": {
-    "message": "Enhance your YouTube experience with advanced statistics, AI assistant and much more."
-  },
-  "views": {
-    "message": "Views"
-  },
-  "likes": {
-    "message": "Likes"
-  },
-  "dislikes": {
-    "message": "Dislikes"
-  },
-  "subscribers": {
-    "message": "Subscribers"
-  },
-  "publishedOn": {
-    "message": "Published on"
-  },
-  "engagementRate": {
-    "message": "Engagement Rate"
-  },
-  "likeDislikeRatio": {
-    "message": "Like/Dislike Ratio"
-  },
-  "estimatedRevenue": {
-    "message": "Estimated Revenue"
-  },
-  "viewsPerDay": {
-    "message": "Views per day"
-  },
-  "viewsPerHour": {
-    "message": "Views per hour"
-  },
-  "videoAge": {
-    "message": "Video age"
-  },
-  "thumbnailHistory": {
-    "message": "Thumbnail History"
-  },
-  "currentThumbnail": {
-    "message": "Current Thumbnail"
-  },
-  "previousThumbnails": {
-    "message": "Previous Thumbnails"
-  },
-  "noThumbnailsFound": {
-    "message": "No previous thumbnails found"
-  },
-  "channelStatistics": {
-    "message": "Channel Statistics"
-  },
-  "totalVideos": {
-    "message": "Total Videos"
-  },
-  "totalViews": {
-    "message": "Total Views"
-  },
-  "avgViewsPerVideo": {
-    "message": "Avg Views per Video"
-  },
-  "channelCreated": {
-    "message": "Channel Created"
-  },
-  "uploadFrequency": {
-    "message": "Upload Frequency"
-  },
-  "seoScore": {
-    "message": "SEO Score"
-  },
-  "titleAnalysis": {
-    "message": "Title Analysis"
-  },
-  "descriptionAnalysis": {
-    "message": "Description Analysis"
-  },
-  "tagsAnalysis": {
-    "message": "Tags Analysis"
-  },
-  "aiAssistant": {
-    "message": "BlueFox AI Assistant"
-  },
-  "aiPlaceholder": {
-    "message": "Ask for tips to boost your videos..."
-  },
-  "aiSend": {
-    "message": "Send"
-  },
-  "aiWelcome": {
-    "message": "👋 Hello! I'm the BlueFox assistant. Ask me about how to improve your YouTube videos, optimize titles, thumbnails, or any strategy to go viral!"
-  },
-  "statsPanel": {
-    "message": "📊 BlueFox Statistics"
-  },
-  "viewsGraph": {
-    "message": "Views Graph"
-  },
-  "excellent": {
-    "message": "Excellent"
-  },
-  "good": {
-    "message": "Good"
-  },
-  "average": {
-    "message": "Average"
-  },
-  "poor": {
-    "message": "Poor"
-  },
-  "settings": {
-    "message": "Settings"
-  },
-  "language": {
-    "message": "Language"
-  },
-  "enableDislikes": {
-    "message": "Show dislikes"
-  },
-  "enableGraph": {
-    "message": "Show views graph"
-  },
-  "enableThumbnails": {
-    "message": "Show thumbnail history"
-  },
-  "enableAI": {
-    "message": "Enable AI assistant"
-  },
-  "enableSEO": {
-    "message": "Enable SEO analysis"
-  },
-  "enableChannelStats": {
-    "message": "Show channel stats"
-  },
-  "days": {
-    "message": "days"
-  },
-  "hours": {
-    "message": "hours"
-  },
-  "minutes": {
-    "message": "minutes"
-  },
-  "bestPostTime": {
-    "message": "Best time to publish"
-  },
-  "viralScore": {
-    "message": "Viral Score"
-  },
-  "exportData": {
-    "message": "Export Data"
-  },
-  "compareVideos": {
-    "message": "Compare Videos"
-  },
-  "trendingTags": {
-    "message": "Trending Tags"
-  },
-  "titleLength": {
-    "message": "Title Length"
-  },
-  "descriptionLength": {
-    "message": "Description Length"
-  },
-  "hasTimestamps": {
-    "message": "Has Timestamps"
-  },
-  "hasLinks": {
-    "message": "Has Links"
-  },
-  "yes": {
-    "message": "Yes"
-  },
-  "no": {
-    "message": "No"
-  },
-  "characters": {
-    "message": "characters"
-  },
-  "performanceScore": {
-    "message": "Performance Score"
-  },
-  "close": {
-    "message": "Close"
-  },
-  "loading": {
-    "message": "Loading..."
-  },
-  "error": {
-    "message": "Error"
-  },
-  "retry": {
-    "message": "Retry"
-  }
+  "extensionName": {
+    "message": "BlueFox Stats",
+    "description": "Extension name"
+  },
+  "extensionDescription": {
+    "message": "Advanced YouTube statistics, HD thumbnails, revenue estimation, dislike counter and AI assistant for creators.",
+    "description": "Extension description"
+  },
+  "views": { "message": "Views" },
+  "likes": { "message": "Likes" },
+  "dislikes": { "message": "Dislikes" },
+  "comments": { "message": "Comments" },
+  "subscribers": { "message": "Subscribers" },
+  "engagement": { "message": "Engagement" },
+  "likeRatio": { "message": "Like ratio" },
+  "viewsPerDay": { "message": "Views/day" },
+  "estimatedRevenue": { "message": "Estimated revenue" },
+  "publishedOn": { "message": "Published on" },
+  "duration": { "message": "Duration" },
+  "category": { "message": "Category" },
+  "performance": { "message": "Performance" },
+  "stats": { "message": "Statistics" },
+  "thumbnails": { "message": "Thumbnails" },
+  "channel": { "message": "Channel" },
+  "seo": { "message": "SEO" },
+  "ai": { "message": "AI" },
+  "settings": { "message": "Settings" },
+  "language": { "message": "Language" },
+  "apiKey": { "message": "YouTube API Key" },
+  "apiKeyPlaceholder": { "message": "Paste your API key here..." },
+  "apiKeyHelp": { "message": "Get a free key on Google Cloud Console" },
+  "autoShow": { "message": "Auto-show panel" },
+  "showDislikes": { "message": "Show dislikes" },
+  "darkMode": { "message": "Dark mode" },
+  "panelPosition": { "message": "Panel position" },
+  "sidebar": { "message": "Sidebar" },
+  "floating": { "message": "Floating" },
+  "save": { "message": "Save" },
+  "saved": { "message": "Saved!" },
+  "loading": { "message": "Loading..." },
+  "error": { "message": "Error" },
+  "retry": { "message": "Retry" },
+  "noData": { "message": "No data available" },
+  "close": { "message": "Close" },
+  "minimize": { "message": "Minimize" },
+  "refresh": { "message": "Refresh" }
 }

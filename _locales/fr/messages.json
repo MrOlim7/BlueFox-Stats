@@ -1,197 +1,48 @@
 {
-  "extName": {
-    "message": "BlueFox Stats v0.1"
-  },
-  "extDescription": {
-    "message": "Améliorez votre expérience YouTube avec des statistiques avancées, un assistant IA et bien plus encore."
-  },
-  "views": {
-    "message": "Vues"
-  },
-  "likes": {
-    "message": "J'aime"
-  },
-  "dislikes": {
-    "message": "Je n'aime pas"
-  },
-  "subscribers": {
-    "message": "Abonnés"
-  },
-  "publishedOn": {
-    "message": "Publié le"
-  },
-  "engagementRate": {
-    "message": "Taux d'engagement"
-  },
-  "likeDislikeRatio": {
-    "message": "Ratio J'aime/J'aime pas"
-  },
-  "estimatedRevenue": {
-    "message": "Revenus estimés"
-  },
-  "viewsPerDay": {
-    "message": "Vues par jour"
-  },
-  "viewsPerHour": {
-    "message": "Vues par heure"
-  },
-  "videoAge": {
-    "message": "Âge de la vidéo"
-  },
-  "thumbnailHistory": {
-    "message": "Historique des miniatures"
-  },
-  "currentThumbnail": {
-    "message": "Miniature actuelle"
-  },
-  "previousThumbnails": {
-    "message": "Miniatures précédentes"
-  },
-  "noThumbnailsFound": {
-    "message": "Aucune miniature précédente trouvée"
-  },
-  "channelStatistics": {
-    "message": "Statistiques de la chaîne"
-  },
-  "totalVideos": {
-    "message": "Total de vidéos"
-  },
-  "totalViews": {
-    "message": "Total de vues"
-  },
-  "avgViewsPerVideo": {
-    "message": "Moyenne de vues par vidéo"
-  },
-  "channelCreated": {
-    "message": "Chaîne créée le"
-  },
-  "uploadFrequency": {
-    "message": "Fréquence d'upload"
-  },
-  "seoScore": {
-    "message": "Score SEO"
-  },
-  "titleAnalysis": {
-    "message": "Analyse du titre"
-  },
-  "descriptionAnalysis": {
-    "message": "Analyse de la description"
-  },
-  "tagsAnalysis": {
-    "message": "Analyse des tags"
-  },
-  "aiAssistant": {
-    "message": "Assistant IA BlueFox"
-  },
-  "aiPlaceholder": {
-    "message": "Demandez des conseils pour booster vos vidéos..."
-  },
-  "aiSend": {
-    "message": "Envoyer"
-  },
-  "aiWelcome": {
-    "message": "👋 Bonjour ! Je suis l'assistant BlueFox. Posez-moi vos questions sur comment améliorer vos vidéos YouTube, optimiser vos titres, miniatures, ou toute stratégie pour percer !"
-  },
-  "statsPanel": {
-    "message": "📊 Statistiques BlueFox"
-  },
-  "viewsGraph": {
-    "message": "Graphique des vues"
-  },
-  "excellent": {
-    "message": "Excellent"
-  },
-  "good": {
-    "message": "Bon"
-  },
-  "average": {
-    "message": "Moyen"
-  },
-  "poor": {
-    "message": "Faible"
-  },
-  "settings": {
-    "message": "Paramètres"
-  },
-  "language": {
-    "message": "Langue"
-  },
-  "enableDislikes": {
-    "message": "Afficher les dislikes"
-  },
-  "enableGraph": {
-    "message": "Afficher le graphique des vues"
-  },
-  "enableThumbnails": {
-    "message": "Afficher l'historique des miniatures"
-  },
-  "enableAI": {
-    "message": "Activer l'assistant IA"
-  },
-  "enableSEO": {
-    "message": "Activer l'analyse SEO"
-  },
-  "enableChannelStats": {
-    "message": "Afficher les stats de chaîne"
-  },
-  "days": {
-    "message": "jours"
-  },
-  "hours": {
-    "message": "heures"
-  },
-  "minutes": {
-    "message": "minutes"
-  },
-  "bestPostTime": {
-    "message": "Meilleur moment pour publier"
-  },
-  "viralScore": {
-    "message": "Score de viralité"
-  },
-  "exportData": {
-    "message": "Exporter les données"
-  },
-  "compareVideos": {
-    "message": "Comparer les vidéos"
-  },
-  "trendingTags": {
-    "message": "Tags tendances"
-  },
-  "titleLength": {
-    "message": "Longueur du titre"
-  },
-  "descriptionLength": {
-    "message": "Longueur de la description"
-  },
-  "hasTimestamps": {
-    "message": "Contient des timestamps"
-  },
-  "hasLinks": {
-    "message": "Contient des liens"
-  },
-  "yes": {
-    "message": "Oui"
-  },
-  "no": {
-    "message": "Non"
-  },
-  "characters": {
-    "message": "caractères"
-  },
-  "performanceScore": {
-    "message": "Score de performance"
-  },
-  "close": {
-    "message": "Fermer"
-  },
-  "loading": {
-    "message": "Chargement..."
-  },
-  "error": {
-    "message": "Erreur"
-  },
-  "retry": {
-    "message": "Réessayer"
-  }
+  "extensionName": {
+    "message": "BlueFox Stats",
+    "description": "Nom de l'extension"
+  },
+  "extensionDescription": {
+    "message": "Statistiques YouTube avancées, miniatures HD, estimation des revenus, compteur de dislikes et assistant IA pour les créateurs.",
+    "description": "Description de l'extension"
+  },
+  "views": { "message": "Vues" },
+  "likes": { "message": "Likes" },
+  "dislikes": { "message": "Dislikes" },
+  "comments": { "message": "Commentaires" },
+  "subscribers": { "message": "Abonnés" },
+  "engagement": { "message": "Engagement" },
+  "likeRatio": { "message": "Ratio likes" },
+  "viewsPerDay": { "message": "Vues/jour" },
+  "estimatedRevenue": { "message": "Revenus estimés" },
+  "publishedOn": { "message": "Publié le" },
+  "duration": { "message": "Durée" },
+  "category": { "message": "Catégorie" },
+  "performance": { "message": "Performance" },
+  "stats": { "message": "Statistiques" },
+  "thumbnails": { "message": "Miniatures" },
+  "channel": { "message": "Chaîne" },
+  "seo": { "message": "SEO" },
+  "ai": { "message": "IA" },
+  "settings": { "message": "Paramètres" },
+  "language": { "message": "Langue" },
+  "apiKey": { "message": "Clé API YouTube" },
+  "apiKeyPlaceholder": { "message": "Collez votre clé API ici..." },
+  "apiKeyHelp": { "message": "Obtenez une clé gratuite sur Google Cloud Console" },
+  "autoShow": { "message": "Afficher automatiquement" },
+  "showDislikes": { "message": "Afficher les dislikes" },
+  "darkMode": { "message": "Mode sombre" },
+  "panelPosition": { "message": "Position du panneau" },
+  "sidebar": { "message": "Barre latérale" },
+  "floating": { "message": "Flottant" },
+  "save": { "message": "Sauvegarder" },
+  "saved": { "message": "Sauvegardé !" },
+  "loading": { "message": "Chargement..." },
+  "error": { "message": "Erreur" },
+  "retry": { "message": "Réessayer" },
+  "noData": { "message": "Aucune donnée disponible" },
+  "close": { "message": "Fermer" },
+  "minimize": { "message": "Réduire" },
+  "refresh": { "message": "Actualiser" }
 }

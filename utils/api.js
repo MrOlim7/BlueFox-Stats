@@ -1,186 +1,227 @@
-// BlueFox Stats v0.1 - API Module
+// ============================================
+// BlueFox Stats v0.1 - API Manager
+// ============================================
 
-const BlueFoxAPI = {
-  async getDislikeData(videoId) {
-    return new Promise((resolve) => {
-      chrome.runtime.sendMessage(
-        { action: 'fetchDislike', videoId },
-        (response) => {
-          if (response && response.success) {
-            resolve(response.data);
-          } else {
-            resolve(null);
-          }
+const BFApi = {
+  // YouTube Data API via background script
+  async youtubeRequest(endpoint, params = {}) {
+    return new Promise((resolve, reject) => {
+      chrome.runtime.sendMessage({
+        type: 'BF_API_REQUEST',
+        endpoint: endpoint,
+        params: params
+      }, (response) => {
+        if (chrome.runtime.lastError) {
+          reject(new Error(chrome.runtime.lastError.message));
+          return;
         }
-      );
+        if (response && response.success) {
+          resolve(response.data);
+        } else {
+          reject(new Error(response?.error || 'API request failed'));
+        }
+      });
     });
   },
 
-  async getThumbnailHistory(videoId) {
+  // Get video details
+  async getVideoDetails(videoId) {
+    // Check cache first
+    const cached = BFHelpers.cache.get(`video_${videoId}`);
+    if (cached) return cached;
+
+    try {
+      const data = await this.youtubeRequest('videos', {
+        part: 'snippet,statistics,contentDetails,topicDetails',
+        id: videoId
+      });
+
+      if (data.items && data.items.length > 0) {
+        const result = data.items[0];
+        BFHelpers.cache.set(`video_${videoId}`, result, 15);
+        return result;
+      }
+      return null;
+    } catch (error) {
+      console.error('🦊 getVideoDetails error:', error);
+      return null;
+    }
+  },
+
+  // Get channel details
+  async getChannelDetails(channelId) {
+    const cached = BFHelpers.cache.get(`channel_${channelId}`);
+    if (cached) return cached;
+
+    try {
+      const data = await this.youtubeRequest('channels', {
+        part: 'snippet,statistics,brandingSettings',
+        id: channelId
+      });
+
+      if (data.items && data.items.length > 0) {
+        const result = data.items[0];
+        BFHelpers.cache.set(`channel_${channelId}`, result, 30);
+        return result;
+      }
+      return null;
+    } catch (error) {
+      console.error('🦊 getChannelDetails error:', error);
+      return null;
+    }
+  },
+
+  // Get channel recent videos
+  async getChannelVideos(channelId, maxResults = 10) {
+    try {
+      // First get uploads playlist
+      const channelData = await this.youtubeRequest('channels', {
+        part: 'contentDetails',
+        id: channelId
+      });
+
+      if (!channelData.items || !channelData.items.length) return [];
+
+      const uploadsId = channelData.items[0].contentDetails.relatedPlaylists.uploads;
+
+      // Get videos from uploads playlist
+      const playlistData = await this.youtubeRequest('playlistItems', {
+        part: 'snippet,contentDetails',
+        playlistId: uploadsId,
+        maxResults: maxResults
+      });
+
+      if (!playlistData.items) return [];
+
+      // Get full video stats
+      const videoIds = playlistData.items.map(item => item.contentDetails.videoId).join(',');
+      const videosData = await this.youtubeRequest('videos', {
+        part: 'snippet,statistics,contentDetails',
+        id: videoIds
+      });
+
+      return videosData.items || [];
+    } catch (error) {
+      console.error('🦊 getChannelVideos error:', error);
+      return [];
+    }
+  },
+
+  // Get dislikes from Return YouTube Dislike API
+  async getDislikes(videoId) {
+    const cached = BFHelpers.cache.get(`dislikes_${videoId}`);
+    if (cached) return cached;
+
     return new Promise((resolve) => {
-      chrome.runtime.sendMessage(
-        { action: 'fetchThumbnailHistory', videoId },
-        (response) => {
-          if (response && response.success && Array.isArray(response.data)) {
-            resolve(response.data);
-          } else {
-            resolve([]);
-          }
+      chrome.runtime.sendMessage({
+        type: 'BF_GET_DISLIKES',
+        videoId: videoId
+      }, (response) => {
+        if (chrome.runtime.lastError) {
+          resolve(null);
+          return;
         }
-      );
+        if (response && response.success) {
+          BFHelpers.cache.set(`dislikes_${videoId}`, response.data, 30);
+          resolve(response.data);
+        } else {
+          resolve(null);
+        }
+      });
     });
   },
 
-  getVideoDataFromPage() {
+  // Scrape data from YouTube page (no API needed)
+  scrapeVideoData() {
     const data = {
-      title: '',
-      views: 0,
-      likes: 0,
-      publishedDate: '',
-      channelName: '',
-      channelUrl: '',
-      subscriberCount: 0,
-      description: '',
+      title: null,
+      views: null,
+      likes: null,
+      channelName: null,
+      channelUrl: null,
+      channelAvatar: null,
+      publishDate: null,
+      description: null,
       tags: [],
-      videoId: BlueFoxHelpers.getVideoId()
+      category: null
     };
 
     try {
       // Title
-      const titleEl = document.querySelector('yt-formatted-string.style-scope.ytd-watch-metadata') ||
-                       document.querySelector('h1.ytd-watch-metadata yt-formatted-string') ||
-                       document.querySelector('#title h1 yt-formatted-string');
+      const titleEl = document.querySelector('h1.ytd-watch-metadata yt-formatted-string, h1.title yt-formatted-string');
       if (titleEl) data.title = titleEl.textContent.trim();
 
       // Views
-      const viewsEl = document.querySelector('span.view-count') ||
-                       document.querySelector('ytd-video-view-count-renderer span') ||
-                       document.querySelector('#count ytd-video-view-count-renderer span');
-      if (viewsEl) {
-        const viewsText = viewsEl.textContent.replace(/[^0-9]/g, '');
-        data.views = parseInt(viewsText) || 0;
-      }
-
-      // Likes
-      const likeBtn = document.querySelector('#top-level-buttons-computed ytd-toggle-button-renderer button[aria-label]') ||
-                       document.querySelector('ytd-menu-renderer button[aria-label*="like" i]') ||
-                       document.querySelector('#segmented-like-button button') ||
-                       document.querySelector('like-button-view-model button');
-      if (likeBtn) {
-        const ariaLabel = likeBtn.getAttribute('aria-label') || '';
-        const likeText = ariaLabel.replace(/[^0-9]/g, '');
-        data.likes = parseInt(likeText) || 0;
-        
-        if (!data.likes) {
-          const likeTextEl = likeBtn.querySelector('.yt-spec-button-shape-next__button-text-content') ||
-                             likeBtn.querySelector('span[role="text"]');
-          if (likeTextEl) {
-            const txt = likeTextEl.textContent.trim().replace(/[^0-9KMBkmb.,]/g, '');
-            data.likes = this.parseShortNumber(txt);
-          }
+      const viewEl = document.querySelector('ytd-video-view-count-renderer .view-count, #info-strings yt-formatted-string');
+      if (viewEl) {
+        const viewText = viewEl.textContent.trim();
+        const viewMatch = viewText.match(/[\d\s,.]+/);
+        if (viewMatch) {
+          data.views = parseInt(viewMatch[0].replace(/[\s,.]/g, ''));
         }
       }
 
-      // Published date
-      const dateEl = document.querySelector('#info-strings yt-formatted-string') ||
-                     document.querySelector('ytd-video-primary-info-renderer #info-strings yt-formatted-string');
-      if (dateEl) data.publishedDate = dateEl.textContent.trim();
+      // Likes
+      const likeBtn = document.querySelector('ytd-menu-renderer like-button-view-model button, #top-level-buttons-computed ytd-toggle-button-renderer:first-child');
+      if (likeBtn) {
+        const likeText = likeBtn.getAttribute('aria-label') || likeBtn.textContent;
+        const likeMatch = likeText.match(/[\d\s,.]+/);
+        if (likeMatch) {
+          data.likes = parseInt(likeMatch[0].replace(/[\s,.]/g, ''));
+        }
+      }
 
-      // Also try structured data
-      const scriptTags = document.querySelectorAll('script[type="application/ld+json"]');
-      scriptTags.forEach(script => {
-        try {
-          const json = JSON.parse(script.textContent);
-          if (json.uploadDate) data.publishedDate = json.uploadDate;
-          if (json.interactionStatistic) {
-            json.interactionStatistic.forEach(stat => {
-              if (stat.interactionType === 'http://schema.org/WatchAction') {
-                data.views = data.views || parseInt(stat.userInteractionCount) || 0;
-              }
-            });
-          }
-          if (json.name) data.title = data.title || json.name;
-          if (json.description) data.description = json.description;
-          if (json.keywords) data.tags = json.keywords.split(',').map(t => t.trim());
-        } catch (e) {}
-      });
-
-      // Try meta tags
-      const metaDate = document.querySelector('meta[itemprop="datePublished"]') ||
-                       document.querySelector('meta[itemprop="uploadDate"]');
-      if (metaDate) data.publishedDate = data.publishedDate || metaDate.getAttribute('content');
-
-      // Channel
-      const channelEl = document.querySelector('#owner #channel-name a') ||
-                        document.querySelector('ytd-channel-name a') ||
-                        document.querySelector('#upload-info #channel-name a');
+      // Channel name
+      const channelEl = document.querySelector('#owner #channel-name a, ytd-channel-name a');
       if (channelEl) {
         data.channelName = channelEl.textContent.trim();
         data.channelUrl = channelEl.href;
       }
 
-      // Subscribers
-      const subEl = document.querySelector('#owner-sub-count') ||
-                    document.querySelector('yt-formatted-string#owner-sub-count');
-      if (subEl) {
-        const subText = subEl.textContent.trim();
-        data.subscriberCount = this.parseShortNumber(subText);
-      }
+      // Channel avatar
+      const avatarEl = document.querySelector('#owner img#img, ytd-video-owner-renderer img');
+      if (avatarEl) data.channelAvatar = avatarEl.src;
+
+      // Date from meta
+      const dateEl = document.querySelector('#info-strings yt-formatted-string');
+      if (dateEl) data.publishDate = dateEl.textContent.trim();
 
       // Description
-      const descEl = document.querySelector('#description-inline-expander') ||
-                     document.querySelector('ytd-text-inline-expander #plain-snippet-text') ||
-                     document.querySelector('#snippet-text');
-      if (descEl) data.description = data.description || descEl.textContent.trim();
+      const descEl = document.querySelector('#description-inline-expander yt-formatted-string, #description yt-formatted-string');
+      if (descEl) data.description = descEl.textContent.trim();
 
       // Tags from meta
       const metaKeywords = document.querySelector('meta[name="keywords"]');
-      if (metaKeywords && data.tags.length === 0) {
-        data.tags = metaKeywords.getAttribute('content').split(',').map(t => t.trim());
+      if (metaKeywords) {
+        data.tags = metaKeywords.content.split(',').map(t => t.trim()).filter(t => t);
       }
 
-    } catch (e) {
-      console.error('BlueFox: Error extracting video data', e);
+    } catch (error) {
+      console.error('🦊 Scrape error:', error);
     }
 
     return data;
   },
 
-  parseShortNumber(text) {
-    if (!text) return 0;
-    text = text.toString().trim().toUpperCase();
-    text = text.replace(/[^0-9KMBG.,]/g, '');
-    
-    let multiplier = 1;
-    if (text.includes('B') || text.includes('G')) {
-      multiplier = 1000000000;
-      text = text.replace(/[BG]/g, '');
-    } else if (text.includes('M')) {
-      multiplier = 1000000;
-      text = text.replace(/M/g, '');
-    } else if (text.includes('K')) {
-      multiplier = 1000;
-      text = text.replace(/K/g, '');
-    }
-    
-    text = text.replace(',', '.');
-    const num = parseFloat(text);
-    return Math.round((isNaN(num) ? 0 : num) * multiplier);
-  },
-
-  async getSettings() {
-    return new Promise((resolve) => {
-      chrome.runtime.sendMessage({ action: 'getSettings' }, (response) => {
-        resolve(response || {});
-      });
-    });
-  },
-
-  async saveSettings(settings) {
-    return new Promise((resolve) => {
-      chrome.runtime.sendMessage({ action: 'saveSettings', settings }, (response) => {
-        resolve(response);
-      });
-    });
+  // Get all thumbnail URLs for a video
+  getThumbnailUrls(videoId) {
+    return {
+      default: `https://i.ytimg.com/vi/${videoId}/default.jpg`,
+      medium: `https://i.ytimg.com/vi/${videoId}/mqdefault.jpg`,
+      high: `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`,
+      standard: `https://i.ytimg.com/vi/${videoId}/sddefault.jpg`,
+      maxres: `https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`,
+      // Alternative thumbnails (0, 1, 2, 3)
+      thumb0: `https://i.ytimg.com/vi/${videoId}/0.jpg`,
+      thumb1: `https://i.ytimg.com/vi/${videoId}/1.jpg`,
+      thumb2: `https://i.ytimg.com/vi/${videoId}/2.jpg`,
+      thumb3: `https://i.ytimg.com/vi/${videoId}/3.jpg`,
+      // WebP versions
+      webpDefault: `https://i.ytimg.com/vi_webp/${videoId}/mqdefault.webp`,
+      webpMax: `https://i.ytimg.com/vi_webp/${videoId}/maxresdefault.webp`
+    };
   }
 };
+
+// Make available globally
+window.BFApi = BFApi;

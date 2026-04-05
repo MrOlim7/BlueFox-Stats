@@ -1,12 +1,12 @@
 {
   "manifest_version": 3,
   "name": "BlueFox Stats",
-  "version": "0.1",
-  "description": "Extension avancée de statistiques YouTube",
+  "version": "0.2",
+  "description": "Extension avancée de statistiques YouTube avec interface modernisée et corrections critiques",
   "default_locale": "fr",
   "action": {
     "default_popup": "popup/popup.html",
-    "default_title": "BlueFox Stats v0.1"
+    "default_title": "BlueFox Stats v0.2"
   },
   "permissions": [
     "activeTab",
@@ -26,17 +26,7 @@
     {
       "matches": ["*://*.youtube.com/*"],
       "css": ["styles/content.css"],
-      "js": [
-        "utils/logger.js",
-        "utils/cache.js",
-        "utils/errorHandler.js",
-        "utils/helpers.js",
-        "utils/api.js",
-        "utils/i18n.js",
-        "utils/manager.js",
-        "content/content.js",
-        "content/init.js"
-      ],
+      "js": ["content/content.js"],
       "run_at": "document_idle"
     }
   ],

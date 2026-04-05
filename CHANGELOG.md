@@ -1,5 +1,104 @@
 # CHANGELOG - BlueFox Stats
 
+## [0.2] - 2024-04-05
+
+### 🎨 INTERFACE COMPLÈTEMENT MODERNISÉE
+
+#### Popup HTML (`popup/popup.html`)
+- ✅ **Nouveau design moderne et professionnel**
+- ✅ **Système d'onglets** (Paramètres, API, Avancé)
+- ✅ **Amélioration majeure UX/UI**
+- ✅ **Clarification de la gestion de l'API YouTube**
+  - Onglet API dédié avec instructions complètes
+  - Explication étape par étape pour obtenir une clé API
+  - Références HTML cohérentes avec le JavaScript
+
+#### Popup CSS (`popup/popup.css`)
+- ✅ **Design complètement refondu**
+  - Palette de couleurs moderne (bleu, pourpre, gradients)
+  - Animations fluides (pulse, blink, transitions)
+  - Support du mode sombre intégré
+  - Meilleur contraste et lisibilité
+  - Gestion des onglets avec navigation visuelle
+- ✅ **Responsive et polished**
+  - Meilleure utilisation de l'espace (450px de largeur)
+  - Padding et spacing cohérents
+  - Scrollbar stylisée
+- ✅ **Accessibilité améliorée**
+  - Support du prefers-reduced-motion
+  - Contraste suffisant pour lecteurs d'écran
+
+#### Popup JS (`popup/popup.js`)
+- ✅ **CORRECTION CRITIQUE : Sauvegarde d'API key**
+  - Tous les IDs HTML et JS maintenant sincronisés
+  - Gestion robuste de la visibilité du mot de passe
+  - Validation de la clé API avant sauvegarde
+  - Statut API en temps réel (dot et message)
+- ✅ **Nouvelle système de paramètres complets**
+  - Paramètres (6 options)
+  - Tab API (gestion claire de la clé)
+  - Tab Avancé (options supplémentaires)
+  - Auto-sauvegarde des paramètres
+- ✅ **Nouvelles fonctionnalités**
+  - Sélection de thème couleur (Auto, Bleu, Violet, Vert)
+  - Notifications toggle
+  - Cache TTL configurable (5min à 1h)
+  - Démonstration du graphique toggle
+  - Analyse SEO toggle
+  - Assistant IA toggle
+  - Réinitialisation des paramètres
+  - Vider le cache
+  - Suppression de l'API key
+
+### 🐛 BUGS CRITIQUES CORRIGÉS
+
+| Bug | Fichier | Problème | Solution |
+|-----|---------|---------|----------|
+| IDs HTML incohérents | popup.html/js | IDs ne correspondent pas | Tous les IDs synchronisés |
+| API key ne se sauvegarde pas | popup.js | Références undefined | Gestionnaire complet et testé |
+| Interface confuse | popup.html | Pas d'explication pour l'API | Onglet dédié avec guide |
+| Manque de persistance | popup.js | Settings pas sauvegardés | Auto-save implémenté |
+| Toggle et selects cassés | popup.html | Éléments manquants | Tous les éléments présents |
+
+### 🆕 NOUVELLES OPTIONS AJOUTÉES
+
+1. **Thème couleur**: Auto/Bleu/Violet/Vert
+2. **Notifications**: Toggle pour activer/désactiver
+3. **Graphique des vues**: Toggle pour afficher/masquer
+4. **Analyse SEO**: Toggle pour les recommandations SEO
+5. **Assistant IA**: Toggle pour les suggestions IA
+6. **Cache TTL**: 5min, 15min, 30min, 1h (configurable)
+7. **Réinitialisation complète**: Un clic pour restaurer les paramètres par défaut
+8. **Gestion du cache**: Bouton pour vider le cache
+
+### 🎯 AMÉLIORATIONS GÉNÉRALES
+
+#### Performance
+- ✅ Interface plus rapide à charger
+- ✅ Gestion optimisée du stockage
+- ✅ Auto-save sans ralentissement
+
+#### UX/UI
+- ✅ Animations fluides et modernes
+- ✅ Contre-visuels clairs (dot vert/rouge pour API)
+- ✅ Messages de confirmation pour actions critiques
+- ✅ Feedback utilisateur amélioré
+
+#### Maintenabilité
+- ✅ Code structuré avec `PopupManager` (objet singleton)
+- ✅ Commentaires détaillés
+- ✅ Gestion d'erreurs robuste
+- ✅ Messages d'erreur clairs
+
+### 📝 DOCUMENTATION
+
+- ✅ Version mise à jour à v0.2
+- ✅ Description courte mise à jour
+- ✅ Changelog détaillé
+- ✅ Ce présent fichier complet
+
+---
+
 ## [0.1.1] - 2024-04-05
 
 ### 🆕 Ajoutés

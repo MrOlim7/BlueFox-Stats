@@ -31,7 +31,12 @@ chrome.runtime.onInstalled.addListener((details) => {
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.type === 'BF_API_REQUEST') {
     handleApiRequest(message, sendResponse);
-    return true; // Keep channel open for async response
+    return true;
+  }
+
+  if (message.type === 'BF_GET_VIDEO_DETAILS') {
+    getVideoDetailsHandler(message.videoId, sendResponse);
+    return true;
   }
 
   if (message.type === 'BF_GET_SETTINGS') {
@@ -47,6 +52,11 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     chrome.storage.sync.set(saveData, () => {
       sendResponse({ success: true });
     });
+    return true;
+  }
+
+  if (message.type === 'BF_GET_DISLIKES') {
+    fetchDislikes(message.videoId, sendResponse);
     return true;
   }
 });
@@ -153,6 +163,71 @@ async function handleApiRequest(message, sendResponse) {
       success: false,
       error: error.message || 'Unknown error',
       code: error.name || 'UNKNOWN_ERROR'
+    });
+  }
+}
+
+// Get video details from YouTube API
+async function getVideoDetailsHandler(videoId, sendResponse) {
+  try {
+    if (!videoId) {
+      sendResponse({ success: false, error: 'Invalid video ID' });
+      return;
+    }
+
+    // Get API key
+    const storage = await chrome.storage.sync.get(['bfApiKey']);
+    const apiKey = storage.bfApiKey;
+
+    if (!apiKey) {
+      sendResponse({ success: false, error: 'No API key configured', code: 'NO_API_KEY' });
+      return;
+    }
+
+    // Call YouTube API
+    const url = new URL('https://www.googleapis.com/youtube/v3/videos');
+    url.searchParams.append('key', apiKey);
+    url.searchParams.append('id', videoId);
+    url.searchParams.append('part', 'snippet,statistics,contentDetails,topicDetails');
+
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 10000);
+
+    const response = await fetch(url.toString(), {
+      signal: controller.signal,
+      headers: { 'Accept': 'application/json' }
+    });
+
+    clearTimeout(timeout);
+
+    if (!response.ok) {
+      const error = await response.json().catch(() => ({}));
+      sendResponse({
+        success: false,
+        error: error.error?.message || 'API Error'
+      });
+      return;
+    }
+
+    const data = await response.json();
+    
+    if (data.items && data.items.length > 0) {
+      sendResponse({
+        success: true,
+        data: data.items[0]
+      });
+    } else {
+      sendResponse({
+        success: false,
+        error: 'Video not found'
+      });
+    }
+
+  } catch (error) {
+    console.error('🦊 Video details error:', error);
+    sendResponse({
+      success: false,
+      error: error.message || 'Failed to fetch video details'
     });
   }
 }

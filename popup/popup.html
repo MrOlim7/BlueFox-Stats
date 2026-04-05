@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BlueFox Stats</title>
+  <title>BlueFox Stats v0.2</title>
   <link rel="stylesheet" href="popup.css">
 </head>
 <body>
@@ -14,11 +14,11 @@
         <span class="popup-logo">🦊</span>
         <div class="popup-title-group">
           <span class="popup-title">BlueFox Stats</span>
-          <span class="popup-version">v0.1</span>
+          <span class="popup-version">v0.2</span>
         </div>
       </div>
       <div class="popup-header-right">
-        <select id="popup-lang" class="popup-lang-select">
+        <select id="lang-select" class="popup-lang-select">
           <option value="fr">🇫🇷 FR</option>
           <option value="en">🇬🇧 EN</option>
         </select>
@@ -39,22 +39,22 @@
       <div class="popup-quick-stat">
         <span class="popup-quick-icon">👁️</span>
         <span class="popup-quick-value" id="qs-views">-</span>
-        <span class="popup-quick-label" data-i18n="views">Vues</span>
+        <span class="popup-quick-label">Vues</span>
       </div>
       <div class="popup-quick-stat">
         <span class="popup-quick-icon">👍</span>
         <span class="popup-quick-value" id="qs-likes">-</span>
-        <span class="popup-quick-label" data-i18n="likes">Likes</span>
+        <span class="popup-quick-label">Likes</span>
       </div>
       <div class="popup-quick-stat">
         <span class="popup-quick-icon">👎</span>
         <span class="popup-quick-value" id="qs-dislikes">-</span>
-        <span class="popup-quick-label" data-i18n="dislikes">Dislikes</span>
+        <span class="popup-quick-label">Dislikes</span>
       </div>
       <div class="popup-quick-stat">
         <span class="popup-quick-icon">💬</span>
         <span class="popup-quick-value" id="qs-comments">-</span>
-        <span class="popup-quick-label" data-i18n="comments">Commentaires</span>
+        <span class="popup-quick-label">Commentaires</span>
       </div>
     </div>
 
@@ -67,67 +67,165 @@
     <div class="popup-actions">
       <button class="popup-btn popup-btn-primary" id="btn-open-panel" style="display:none;">
         <span>📊</span>
-        <span data-i18n="openPanel">Ouvrir le panneau</span>
+        <span>Ouvrir le panneau</span>
       </button>
       <button class="popup-btn popup-btn-secondary" id="btn-toggle-panel" style="display:none;">
         <span>👁️</span>
-        <span data-i18n="togglePanel">Afficher/Masquer</span>
+        <span>Afficher/Masquer</span>
       </button>
     </div>
 
-    <!-- Settings -->
-    <div class="popup-settings">
-      <div class="popup-setting-title" data-i18n="settings">⚙️ Paramètres</div>
-      
-      <div class="popup-setting-item">
-        <label class="popup-setting-label" data-i18n="autoShow">Affichage automatique</label>
-        <label class="popup-toggle">
-          <input type="checkbox" id="setting-autoshow" checked>
-          <span class="popup-toggle-slider"></span>
-        </label>
-      </div>
+    <!-- Tabs Navigation -->
+    <div class="popup-tabs">
+      <button class="popup-tab active" data-tab="settings">⚙️ Paramètres</button>
+      <button class="popup-tab" data-tab="api">🔑 API</button>
+      <button class="popup-tab" data-tab="advanced">🔧 Avancé</button>
+    </div>
 
-      <div class="popup-setting-item">
-        <label class="popup-setting-label" data-i18n="showDislikes">Afficher les dislikes</label>
-        <label class="popup-toggle">
-          <input type="checkbox" id="setting-dislikes" checked>
-          <span class="popup-toggle-slider"></span>
-        </label>
-      </div>
+    <!-- Settings Tab -->
+    <div class="popup-tab-content active" id="settings-tab" data-tab="settings">
+      <div class="popup-settings">
+        
+        <div class="popup-setting-item">
+          <label class="popup-setting-label">Affichage automatique</label>
+          <label class="popup-toggle">
+            <input type="checkbox" id="setting-autoshow" checked>
+            <span class="popup-toggle-slider"></span>
+          </label>
+        </div>
 
-      <div class="popup-setting-item">
-        <label class="popup-setting-label" data-i18n="darkMode">Mode sombre</label>
-        <label class="popup-toggle">
-          <input type="checkbox" id="setting-darkmode" checked>
-          <span class="popup-toggle-slider"></span>
-        </label>
-      </div>
+        <div class="popup-setting-item">
+          <label class="popup-setting-label">Afficher les dislikes</label>
+          <label class="popup-toggle">
+            <input type="checkbox" id="setting-dislikes" checked>
+            <span class="popup-toggle-slider"></span>
+          </label>
+        </div>
 
-      <div class="popup-setting-item">
-        <label class="popup-setting-label" data-i18n="panelPosition">Position du panneau</label>
-        <select id="setting-position" class="popup-select">
-          <option value="sidebar" data-i18n="sidebar">Barre latérale</option>
-          <option value="floating" data-i18n="floating">Flottant</option>
-        </select>
+        <div class="popup-setting-item">
+          <label class="popup-setting-label">Mode sombre</label>
+          <label class="popup-toggle">
+            <input type="checkbox" id="setting-darkmode" checked>
+            <span class="popup-toggle-slider"></span>
+          </label>
+        </div>
+
+        <div class="popup-setting-item">
+          <label class="popup-setting-label">Position du panneau</label>
+          <select id="setting-position" class="popup-select">
+            <option value="sidebar">Barre latérale</option>
+            <option value="floating">Flottant</option>
+          </select>
+        </div>
+
+        <div class="popup-setting-item">
+          <label class="popup-setting-label">Thème couleur</label>
+          <select id="setting-theme" class="popup-select">
+            <option value="auto">Auto (Auto)</option>
+            <option value="blue">Bleu (Blue)</option>
+            <option value="purple">Violet (Purple)</option>
+            <option value="green">Vert (Green)</option>
+          </select>
+        </div>
+
+        <div class="popup-setting-item">
+          <label class="popup-setting-label">Notifications</label>
+          <label class="popup-toggle">
+            <input type="checkbox" id="setting-notifications" checked>
+            <span class="popup-toggle-slider"></span>
+          </label>
+        </div>
+
       </div>
     </div>
 
-    <!-- API Key -->
-    <div class="popup-api-section">
-      <div class="popup-setting-title">🔑 API YouTube</div>
-      <div class="popup-api-input-group">
-        <input type="password" id="api-key-input" class="popup-api-input" 
-               placeholder="Entrez votre clé API YouTube...">
-        <button class="popup-btn popup-btn-sm" id="btn-save-api">💾</button>
-        <button class="popup-btn popup-btn-sm" id="btn-toggle-api">👁️</button>
+    <!-- API Tab -->
+    <div class="popup-tab-content" id="api-tab" data-tab="api">
+      <div class="popup-api-section">
+        
+        <div class="popup-api-info">
+          <div class="popup-info-title">🔑 Clé API YouTube</div>
+          <p>Obtenez une clé API gratuite sur <a href="https://console.developers.google.com/" target="_blank">Google Console</a></p>
+        </div>
+
+        <div class="popup-api-input-group">
+          <label class="popup-setting-label">Clé API</label>
+          <div class="popup-api-input-wrapper">
+            <input type="password" id="api-key-input" class="popup-api-input" 
+                   placeholder="AIzaSy...">
+            <button class="popup-btn-icon" id="btn-toggle-api-visibility">👁️</button>
+          </div>
+        </div>
+
+        <div class="popup-api-status" id="api-status">
+          <span class="popup-api-dot" id="api-dot"></span>
+          <span id="api-status-text">Non configurée</span>
+        </div>
+
+        <div class="popup-api-buttons">
+          <button class="popup-btn popup-btn-success" id="btn-save-api">💾 Sauvegarder</button>
+          <button class="popup-btn popup-btn-danger" id="btn-delete-api">🗑️ Supprimer</button>
+        </div>
+
+        <div class="popup-api-help">
+          <strong>Comment obtenir une clé API :</strong>
+          <ol>
+            <li>Allez sur <a href="https://console.developers.google.com/" target="_blank">Google Console</a></li>
+            <li>Créez un nouveau projet</li>
+            <li>Activez YouTube Data API v3</li>
+            <li>Créez une clé API</li>
+            <li>Collez la clé ci-dessus</li>
+          </ol>
+        </div>
+
       </div>
-      <div class="popup-api-status" id="api-status">
-        <span class="popup-api-dot" id="api-dot"></span>
-        <span id="api-status-text">Non configurée</span>
+    </div>
+
+    <!-- Advanced Tab -->
+    <div class="popup-tab-content" id="advanced-tab" data-tab="advanced">
+      <div class="popup-advanced">
+
+        <div class="popup-setting-item">
+          <label class="popup-setting-label">Afficher le graphique des vues</label>
+          <label class="popup-toggle">
+            <input type="checkbox" id="setting-graph" checked>
+            <span class="popup-toggle-slider"></span>
+          </label>
+        </div>
+
+        <div class="popup-setting-item">
+          <label class="popup-setting-label">Afficher l'analyse SEO</label>
+          <label class="popup-toggle">
+            <input type="checkbox" id="setting-seo" checked>
+            <span class="popup-toggle-slider"></span>
+          </label>
+        </div>
+
+        <div class="popup-setting-item">
+          <label class="popup-setting-label">Afficher l'assistant IA</label>
+          <label class="popup-toggle">
+            <input type="checkbox" id="setting-ai" checked>
+            <span class="popup-toggle-slider"></span>
+          </label>
+        </div>
+
+        <div class="popup-setting-item">
+          <label class="popup-setting-label">Cache (en minutes)</label>
+          <select id="setting-cache-ttl" class="popup-select">
+            <option value="5">5 minutes</option>
+            <option value="15" selected>15 minutes</option>
+            <option value="30">30 minutes</option>
+            <option value="60">1 heure</option>
+          </select>
+        </div>
+
+        <div class="popup-danger-zone">
+          <label class="popup-setting-label">Zone de danger</label>
+          <button class="popup-btn popup-btn-danger-full" id="btn-reset-settings">⚠️ Réinitialiser tous les paramètres</button>
+          <button class="popup-btn popup-btn-danger-full" id="btn-clear-cache">🗑️ Vider le cache</button>
+        </div>
+
       </div>
-      <a href="https://console.developers.google.com/" target="_blank" class="popup-api-link">
-        📎 Obtenir une clé API gratuite
-      </a>
     </div>
 
     <!-- Footer -->

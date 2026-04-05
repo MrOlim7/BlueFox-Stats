@@ -6,8 +6,11 @@ const BlueFoxI18n = (() => {
       views: "Vues",
       likes: "J'aime",
       dislikes: "Je n'aime pas",
+      comments: "Commentaires",
       subscribers: "Abonnés",
+      videoPerformance: "Performance de la vidéo",
       publishedOn: "Publié le",
+      videoId: "ID Vidéo",
       engagementRate: "Taux d'engagement",
       likeDislikeRatio: "Ratio J'aime/J'aime pas",
       estimatedRevenue: "Revenus estimés",
@@ -38,15 +41,16 @@ const BlueFoxI18n = (() => {
       good: "Bon",
       average: "Moyen",
       poor: "Faible",
-      settings: "Paramètres",
+      settings: "⚙️ Paramètres",
       language: "Langue",
       days: "jours",
       hours: "heures",
       minutes: "minutes",
+      seconds: "secondes",
       bestPostTime: "Meilleur moment pour publier",
       viralScore: "Score de viralité",
-      exportData: "Exporter les données",
-      compareVideos: "Comparer les vidéos",
+      exportData: "📥 Exporter les données",
+      compareVideos: "🔀 Comparer les vidéos",
       titleLength: "Longueur du titre",
       descriptionLength: "Longueur de la description",
       hasTimestamps: "Contient des timestamps",
@@ -54,51 +58,31 @@ const BlueFoxI18n = (() => {
       yes: "Oui",
       no: "Non",
       characters: "caractères",
-      performanceScore: "Score de performance",
       close: "Fermer",
       loading: "Chargement...",
       error: "Erreur",
+      success: "Succès",
       retry: "Réessayer",
       estimatedCPM: "CPM estimé",
-      videoPerformance: "Performance vidéo",
-      aboveAverage: "Au-dessus de la moyenne",
-      belowAverage: "En-dessous de la moyenne",
-      trendingTags: "Tags tendances",
-      optimizationTips: "Conseils d'optimisation",
-      tipTitle: "✏️ Titre : ",
-      tipDesc: "📝 Description : ",
-      tipTags: "🏷️ Tags : ",
-      tipThumb: "🖼️ Miniature : ",
-      tipTiming: "⏰ Timing : ",
-      videoComparison: "Comparaison vidéo",
-      weekday: "Jour de semaine",
-      weekend: "Weekend",
-      morning: "Matin (8h-12h)",
-      afternoon: "Après-midi (12h-17h)",
-      evening: "Soir (17h-21h)",
-      night: "Nuit (21h-8h)",
-      downloadReport: "Télécharger le rapport",
       shareStats: "Partager les stats",
-      videoId: "ID Vidéo",
-      duration: "Durée",
-      category: "Catégorie",
-      commentsCount: "Nombre de commentaires",
-      favoriteCount: "Nombre de favoris",
-      projectedViews: "Vues projetées (30j)",
-      growthRate: "Taux de croissance",
-      estimatedEarnings: "Gains estimés",
-      audienceRetention: "Rétention estimée",
-      clickThroughRate: "CTR estimé",
-      hashtagAnalysis: "Analyse des hashtags",
-      competitorAnalysis: "Analyse concurrentielle",
-      contentSuggestions: "Suggestions de contenu"
+      openPanel: "Ouvrir le panneau",
+      togglePanel: "Afficher/Masquer",
+      autoShow: "Affichage automatique",
+      showDislikes: "Afficher les dislikes",
+      darkMode: "Mode sombre",
+      panelPosition: "Position du panneau",
+      viral: "Viral 🔥",
+      projectedViews: "Vues projettées"
     },
     en: {
       views: "Views",
       likes: "Likes",
       dislikes: "Dislikes",
+      comments: "Comments",
       subscribers: "Subscribers",
+      videoPerformance: "Video Performance",
       publishedOn: "Published on",
+      videoId: "Video ID",
       engagementRate: "Engagement Rate",
       likeDislikeRatio: "Like/Dislike Ratio",
       estimatedRevenue: "Estimated Revenue",
@@ -122,22 +106,23 @@ const BlueFoxI18n = (() => {
       aiAssistant: "BlueFox AI Assistant",
       aiPlaceholder: "Ask for tips to boost your videos...",
       aiSend: "Send",
-      aiWelcome: "👋 Hello! I'm the BlueFox assistant. Ask me about how to improve your YouTube videos!",
+      aiWelcome: "👋 Hello! I'm the BlueFox assistant. Ask me about YouTube video improvement!",
       statsPanel: "📊 BlueFox Statistics",
       viewsGraph: "Views Graph",
       excellent: "Excellent",
       good: "Good",
       average: "Average",
       poor: "Poor",
-      settings: "Settings",
+      settings: "⚙️ Settings",
       language: "Language",
       days: "days",
       hours: "hours",
       minutes: "minutes",
+      seconds: "seconds",
       bestPostTime: "Best time to publish",
       viralScore: "Viral Score",
-      exportData: "Export Data",
-      compareVideos: "Compare Videos",
+      exportData: "📥 Export Data",
+      compareVideos: "🔀 Compare Videos",
       titleLength: "Title Length",
       descriptionLength: "Description Length",
       hasTimestamps: "Has Timestamps",
@@ -145,68 +130,112 @@ const BlueFoxI18n = (() => {
       yes: "Yes",
       no: "No",
       characters: "characters",
-      performanceScore: "Performance Score",
       close: "Close",
       loading: "Loading...",
       error: "Error",
+      success: "Success",
       retry: "Retry",
       estimatedCPM: "Estimated CPM",
-      videoPerformance: "Video Performance",
-      aboveAverage: "Above average",
-      belowAverage: "Below average",
-      trendingTags: "Trending Tags",
-      optimizationTips: "Optimization Tips",
-      tipTitle: "✏️ Title: ",
-      tipDesc: "📝 Description: ",
-      tipTags: "🏷️ Tags: ",
-      tipThumb: "🖼️ Thumbnail: ",
-      tipTiming: "⏰ Timing: ",
-      videoComparison: "Video Comparison",
-      weekday: "Weekday",
-      weekend: "Weekend",
-      morning: "Morning (8am-12pm)",
-      afternoon: "Afternoon (12pm-5pm)",
-      evening: "Evening (5pm-9pm)",
-      night: "Night (9pm-8am)",
-      downloadReport: "Download Report",
       shareStats: "Share Stats",
-      videoId: "Video ID",
-      duration: "Duration",
-      category: "Category",
-      commentsCount: "Comments Count",
-      favoriteCount: "Favorite Count",
-      projectedViews: "Projected Views (30d)",
-      growthRate: "Growth Rate",
-      estimatedEarnings: "Estimated Earnings",
-      audienceRetention: "Est. Retention",
-      clickThroughRate: "Est. CTR",
-      hashtagAnalysis: "Hashtag Analysis",
-      competitorAnalysis: "Competitor Analysis",
-      contentSuggestions: "Content Suggestions"
+      openPanel: "Open Panel",
+      togglePanel: "Show/Hide",
+      autoShow: "Auto Show",
+      showDislikes: "Show Dislikes",
+      darkMode: "Dark Mode",
+      panelPosition: "Panel Position",
+      viral: "Viral 🔥",
+      projectedViews: "Projected Views"
     }
   };
 
   let currentLang = 'fr';
 
   return {
+    /**
+     * Set current language
+     */
     setLanguage(lang) {
-      currentLang = lang;
+      if (translations[lang]) {
+        currentLang = lang;
+        if (typeof BlueFoxLogger !== 'undefined') {
+          BlueFoxLogger.info(`Language changed to: ${lang}`);
+        }
+      } else {
+        if (typeof BlueFoxLogger !== 'undefined') {
+          BlueFoxLogger.warn(`Language not supported: ${lang}, using default (fr)`);
+        }
+      }
     },
+
+    /**
+     * Get current language
+     */
     getLanguage() {
       return currentLang;
     },
+
+    /**
+     * Translate key with fallback
+     */
     t(key) {
-      return (translations[currentLang] && translations[currentLang][key]) || 
-             translations['en'][key] || key;
+      const trans = translations[currentLang];
+      
+      if (!trans) {
+        if (typeof BlueFoxLogger !== 'undefined') {
+          BlueFoxLogger.warn(`Translation object missing for: ${currentLang}`);
+        }
+        return key;
+      }
+
+      if (!trans[key]) {
+        // Try English fallback
+        const enTrans = translations.en;
+        return enTrans[key] || key;
+      }
+
+      return trans[key];
     },
+
+    /**
+     * Check if key exists
+     */
+    has(key) {
+      const trans = translations[currentLang] || translations.en;
+      return key in trans;
+    },
+
+    /**
+     * Get all translations for current language
+     */
+    getAll() {
+      return translations[currentLang] || translations.fr;
+    },
+
+    /**
+     * Get all available languages
+     */
+    getAvailableLanguages() {
+      return Object.keys(translations);
+    },
+
+    /**
+     * Initialize from storage
+     */
     async init() {
       return new Promise((resolve) => {
-        chrome.storage.local.get('bluefoxSettings', (result) => {
-          if (result.bluefoxSettings && result.bluefoxSettings.language) {
-            currentLang = result.bluefoxSettings.language;
+        try {
+          chrome.storage.sync.get(['bfLanguage'], (data) => {
+            if (data.bfLanguage) {
+              this.setLanguage(data.bfLanguage);
+            }
+            resolve(currentLang);
+          });
+        } catch (error) {
+          if (typeof BlueFoxLogger !== 'undefined') {
+            BlueFoxLogger.error('Failed to initialize i18n', error);
           }
           resolve(currentLang);
-        });
+        }
       });
     }
   };

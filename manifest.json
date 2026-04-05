@@ -27,9 +27,15 @@
       "matches": ["*://*.youtube.com/*"],
       "css": ["styles/content.css"],
       "js": [
+        "utils/logger.js",
+        "utils/cache.js",
+        "utils/errorHandler.js",
         "utils/helpers.js",
         "utils/api.js",
-        "content/content.js"
+        "utils/i18n.js",
+        "utils/manager.js",
+        "content/content.js",
+        "content/init.js"
       ],
       "run_at": "document_idle"
     }

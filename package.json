@@ -1,0 +1,39 @@
+{
+  "name": "BlueFox Stats",
+  "version": "0.1.1",
+  "description": "Extension avancée de statistiques YouTube",
+  "author": "BlueFox Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MrOlim/BlueFox-Stats"
+  },
+  "scripts": {
+    "start": "echo 'Load unpacked: chrome://extensions'",
+    "dev": "echo 'Reload extension from chrome://extensions'",
+    "test": "echo 'Manual testing: Open YouTube video'",
+    "lint": "echo 'Use ESLint if available'",
+    "build": "echo 'Production ready - no build needed'",
+    "docs": "echo 'See README.md, CHANGELOG.md, DEVELOPMENT.md'"
+  },
+  "devDependencies": {},
+  "dependencies": {},
+  "keywords": [
+    "youtube",
+    "statistics",
+    "analytics",
+    "chrome-extension",
+    "seo",
+    "ai"
+  ],
+  "engines": {
+    "chrome": ">=90"
+  },
+  "config": {
+    "logLevel": "INFO",
+    "cacheDefaultTTL": 15,
+    "cacheMaxSize": 100,
+    "apiTimeout": 10000,
+    "devMode": false
+  }
+}

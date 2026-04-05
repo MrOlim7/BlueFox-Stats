@@ -61,7 +61,8 @@ const BlueFoxVideoStats = {
             </div>
           </div>
 
-                      <div class="bf-stat-icon">📅</div>
+          <div class="bf-stat-card">
+            <div class="bf-stat-icon">📅</div>
             <div class="bf-stat-info">
               <span class="bf-stat-value">${videoAge}</span>
               <span class="bf-stat-label">${t('videoAge')}</span>

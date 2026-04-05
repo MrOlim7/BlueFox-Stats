@@ -56,6 +56,16 @@ async function handleApiRequest(message, sendResponse) {
   try {
     const { endpoint, params } = message;
 
+    // Validate request
+    if (!endpoint || typeof endpoint !== 'string') {
+      sendResponse({
+        success: false,
+        error: 'Invalid endpoint',
+        code: 'INVALID_REQUEST'
+      });
+      return;
+    }
+
     // Get API key
     const data = await chrome.storage.sync.get(['bfApiKey']);
     const apiKey = data.bfApiKey;
@@ -69,49 +79,80 @@ async function handleApiRequest(message, sendResponse) {
       return;
     }
 
-    // Build URL
+    // Build URL with validation
     const baseUrl = 'https://www.googleapis.com/youtube/v3';
-    const url = new URL(`${baseUrl}/${endpoint}`);
     
-    // Add params
-    if (params) {
-      Object.keys(params).forEach(key => {
-        url.searchParams.append(key, params[key]);
-      });
-    }
-    url.searchParams.append('key', apiKey);
-
-    // Fetch
-    const response = await fetch(url.toString(), {
-      method: 'GET',
-      headers: {
-        'Accept': 'application/json'
+    try {
+      const url = new URL(`${baseUrl}/${endpoint}`);
+      
+      // Add params with validation
+      if (params && typeof params === 'object') {
+        Object.keys(params).forEach(key => {
+          if (key && params[key] != null) {
+            url.searchParams.append(key, params[key]);
+          }
+        });
       }
-    });
+      url.searchParams.append('key', apiKey);
 
-    if (!response.ok) {
-      const errorData = await response.json().catch(() => ({}));
+      // Fetch with timeout
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 10000);
+
+      const response = await fetch(url.toString(), {
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json'
+        },
+        signal: controller.signal
+      });
+
+      clearTimeout(timeout);
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        console.error('🦊 API Error Response:', errorData);
+        sendResponse({
+          success: false,
+          error: errorData.error?.message || `HTTP ${response.status}`,
+          code: `HTTP_${response.status}`,
+          details: errorData
+        });
+        return;
+      }
+
+      const responseData = await response.json();
+      
+      // Validate response data
+      if (!responseData) {
+        sendResponse({
+          success: false,
+          error: 'Empty response from API',
+          code: 'EMPTY_RESPONSE'
+        });
+        return;
+      }
+
+      sendResponse({
+        success: true,
+        data: responseData
+      });
+
+    } catch (urlError) {
+      console.error('🦊 URL/Parse error:', urlError);
       sendResponse({
         success: false,
-        error: errorData.error?.message || `HTTP ${response.status}`,
-        code: response.status,
-        details: errorData
+        error: 'Failed to process request',
+        code: 'PARSE_ERROR'
       });
-      return;
     }
-
-    const responseData = await response.json();
-    sendResponse({
-      success: true,
-      data: responseData
-    });
 
   } catch (error) {
     console.error('🦊 API Request error:', error);
     sendResponse({
       success: false,
-      error: error.message,
-      code: 'NETWORK_ERROR'
+      error: error.message || 'Unknown error',
+      code: error.name || 'UNKNOWN_ERROR'
     });
   }
 }

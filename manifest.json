@@ -1,0 +1,64 @@
+{
+  "manifest_version": 3,
+  "name": "__MSG_extName__",
+  "description": "__MSG_extDescription__",
+  "version": "0.1",
+  "default_locale": "fr",
+  "permissions": [
+    "activeTab",
+    "storage",
+    "tabs"
+  ],
+  "host_permissions": [
+    "https://www.youtube.com/*",
+    "https://youtube.com/*",
+    "https://returnyoutubedislikeapi.com/*",
+    "https://img.youtube.com/*",
+    "https://i.ytimg.com/*",
+    "https://yt3.ggpht.com/*",
+    "https://web.archive.org/*",
+    "https://noembed.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://www.youtube.com/*"],
+      "css": ["styles/content.css"],
+      "js": [
+        "utils/i18n.js",
+        "utils/helpers.js",
+        "utils/api.js",
+        "components/viewsGraph.js",
+        "components/thumbnailViewer.js",
+        "components/dislikeCounter.js",
+        "components/channelStats.js",
+        "components/videoStats.js",
+        "components/seoAnalyzer.js",
+        "components/aiAssistant.js",
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["icons/*", "styles/*"],
+      "matches": ["https://www.youtube.com/*"]
+    }
+  ]
+}

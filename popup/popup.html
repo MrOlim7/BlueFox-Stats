@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BlueFox Stats</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="popup-container">
+    <!-- Header -->
+    <div class="popup-header">
+      <div class="popup-header-left">
+        <span class="popup-logo">🦊</span>
+        <div class="popup-title-group">
+          <span class="popup-title">BlueFox Stats</span>
+          <span class="popup-version">v0.1</span>
+        </div>
+      </div>
+      <div class="popup-header-right">
+        <select id="popup-lang" class="popup-lang-select">
+          <option value="fr">🇫🇷 FR</option>
+          <option value="en">🇬🇧 EN</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Status -->
+    <div class="popup-status" id="popup-status">
+      <div class="popup-status-icon" id="status-icon">⏳</div>
+      <div class="popup-status-text">
+        <span class="popup-status-title" id="status-title">Vérification...</span>
+        <span class="popup-status-detail" id="status-detail">Analyse de la page en cours</span>
+      </div>
+    </div>
+
+    <!-- Quick Stats (shown when on video page) -->
+    <div class="popup-quick-stats" id="quick-stats" style="display:none;">
+      <div class="popup-quick-stat">
+        <span class="popup-quick-icon">👁️</span>
+        <span class="popup-quick-value" id="qs-views">-</span>
+        <span class="popup-quick-label" data-i18n="views">Vues</span>
+      </div>
+      <div class="popup-quick-stat">
+        <span class="popup-quick-icon">👍</span>
+        <span class="popup-quick-value" id="qs-likes">-</span>
+        <span class="popup-quick-label" data-i18n="likes">Likes</span>
+      </div>
+      <div class="popup-quick-stat">
+        <span class="popup-quick-icon">👎</span>
+        <span class="popup-quick-value" id="qs-dislikes">-</span>
+        <span class="popup-quick-label" data-i18n="dislikes">Dislikes</span>
+      </div>
+      <div class="popup-quick-stat">
+        <span class="popup-quick-icon">💬</span>
+        <span class="popup-quick-value" id="qs-comments">-</span>
+        <span class="popup-quick-label" data-i18n="comments">Commentaires</span>
+      </div>
+    </div>
+
+    <!-- Video Title -->
+    <div class="popup-video-title" id="video-title" style="display:none;">
+      <span id="video-title-text">-</span>
+    </div>
+
+    <!-- Actions -->
+    <div class="popup-actions">
+      <button class="popup-btn popup-btn-primary" id="btn-open-panel" style="display:none;">
+        <span>📊</span>
+        <span data-i18n="openPanel">Ouvrir le panneau</span>
+      </button>
+      <button class="popup-btn popup-btn-secondary" id="btn-toggle-panel" style="display:none;">
+        <span>👁️</span>
+        <span data-i18n="togglePanel">Afficher/Masquer</span>
+      </button>
+    </div>
+
+    <!-- Settings -->
+    <div class="popup-settings">
+      <div class="popup-setting-title" data-i18n="settings">⚙️ Paramètres</div>
+      
+      <div class="popup-setting-item">
+        <label class="popup-setting-label" data-i18n="autoShow">Affichage automatique</label>
+        <label class="popup-toggle">
+          <input type="checkbox" id="setting-autoshow" checked>
+          <span class="popup-toggle-slider"></span>
+        </label>
+      </div>
+
+      <div class="popup-setting-item">
+        <label class="popup-setting-label" data-i18n="showDislikes">Afficher les dislikes</label>
+        <label class="popup-toggle">
+          <input type="checkbox" id="setting-dislikes" checked>
+          <span class="popup-toggle-slider"></span>
+        </label>
+      </div>
+
+      <div class="popup-setting-item">
+        <label class="popup-setting-label" data-i18n="darkMode">Mode sombre</label>
+        <label class="popup-toggle">
+          <input type="checkbox" id="setting-darkmode" checked>
+          <span class="popup-toggle-slider"></span>
+        </label>
+      </div>
+
+      <div class="popup-setting-item">
+        <label class="popup-setting-label" data-i18n="panelPosition">Position du panneau</label>
+        <select id="setting-position" class="popup-select">
+          <option value="sidebar" data-i18n="sidebar">Barre latérale</option>
+          <option value="floating" data-i18n="floating">Flottant</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- API Key -->
+    <div class="popup-api-section">
+      <div class="popup-setting-title">🔑 API YouTube</div>
+      <div class="popup-api-input-group">
+        <input type="password" id="api-key-input" class="popup-api-input" 
+               placeholder="Entrez votre clé API YouTube...">
+        <button class="popup-btn popup-btn-sm" id="btn-save-api">💾</button>
+        <button class="popup-btn popup-btn-sm" id="btn-toggle-api">👁️</button>
+      </div>
+      <div class="popup-api-status" id="api-status">
+        <span class="popup-api-dot" id="api-dot"></span>
+        <span id="api-status-text">Non configurée</span>
+      </div>
+      <a href="https://console.developers.google.com/" target="_blank" class="popup-api-link">
+        📎 Obtenir une clé API gratuite
+      </a>
+    </div>
+
+    <!-- Footer -->
+    <div class="popup-footer">
+      <span>Made with 💙 by BlueFox</span>
+      <span class="popup-footer-sep">|</span>
+      <a href="#" id="btn-rate" class="popup-footer-link">⭐ Noter</a>
+      <span class="popup-footer-sep">|</span>
+      <a href="#" id="btn-support" class="popup-footer-link">☕ Support</a>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

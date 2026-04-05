@@ -1,0 +1,197 @@
+{
+  "extName": {
+    "message": "BlueFox Stats v0.1"
+  },
+  "extDescription": {
+    "message": "Améliorez votre expérience YouTube avec des statistiques avancées, un assistant IA et bien plus encore."
+  },
+  "views": {
+    "message": "Vues"
+  },
+  "likes": {
+    "message": "J'aime"
+  },
+  "dislikes": {
+    "message": "Je n'aime pas"
+  },
+  "subscribers": {
+    "message": "Abonnés"
+  },
+  "publishedOn": {
+    "message": "Publié le"
+  },
+  "engagementRate": {
+    "message": "Taux d'engagement"
+  },
+  "likeDislikeRatio": {
+    "message": "Ratio J'aime/J'aime pas"
+  },
+  "estimatedRevenue": {
+    "message": "Revenus estimés"
+  },
+  "viewsPerDay": {
+    "message": "Vues par jour"
+  },
+  "viewsPerHour": {
+    "message": "Vues par heure"
+  },
+  "videoAge": {
+    "message": "Âge de la vidéo"
+  },
+  "thumbnailHistory": {
+    "message": "Historique des miniatures"
+  },
+  "currentThumbnail": {
+    "message": "Miniature actuelle"
+  },
+  "previousThumbnails": {
+    "message": "Miniatures précédentes"
+  },
+  "noThumbnailsFound": {
+    "message": "Aucune miniature précédente trouvée"
+  },
+  "channelStatistics": {
+    "message": "Statistiques de la chaîne"
+  },
+  "totalVideos": {
+    "message": "Total de vidéos"
+  },
+  "totalViews": {
+    "message": "Total de vues"
+  },
+  "avgViewsPerVideo": {
+    "message": "Moyenne de vues par vidéo"
+  },
+  "channelCreated": {
+    "message": "Chaîne créée le"
+  },
+  "uploadFrequency": {
+    "message": "Fréquence d'upload"
+  },
+  "seoScore": {
+    "message": "Score SEO"
+  },
+  "titleAnalysis": {
+    "message": "Analyse du titre"
+  },
+  "descriptionAnalysis": {
+    "message": "Analyse de la description"
+  },
+  "tagsAnalysis": {
+    "message": "Analyse des tags"
+  },
+  "aiAssistant": {
+    "message": "Assistant IA BlueFox"
+  },
+  "aiPlaceholder": {
+    "message": "Demandez des conseils pour booster vos vidéos..."
+  },
+  "aiSend": {
+    "message": "Envoyer"
+  },
+  "aiWelcome": {
+    "message": "👋 Bonjour ! Je suis l'assistant BlueFox. Posez-moi vos questions sur comment améliorer vos vidéos YouTube, optimiser vos titres, miniatures, ou toute stratégie pour percer !"
+  },
+  "statsPanel": {
+    "message": "📊 Statistiques BlueFox"
+  },
+  "viewsGraph": {
+    "message": "Graphique des vues"
+  },
+  "excellent": {
+    "message": "Excellent"
+  },
+  "good": {
+    "message": "Bon"
+  },
+  "average": {
+    "message": "Moyen"
+  },
+  "poor": {
+    "message": "Faible"
+  },
+  "settings": {
+    "message": "Paramètres"
+  },
+  "language": {
+    "message": "Langue"
+  },
+  "enableDislikes": {
+    "message": "Afficher les dislikes"
+  },
+  "enableGraph": {
+    "message": "Afficher le graphique des vues"
+  },
+  "enableThumbnails": {
+    "message": "Afficher l'historique des miniatures"
+  },
+  "enableAI": {
+    "message": "Activer l'assistant IA"
+  },
+  "enableSEO": {
+    "message": "Activer l'analyse SEO"
+  },
+  "enableChannelStats": {
+    "message": "Afficher les stats de chaîne"
+  },
+  "days": {
+    "message": "jours"
+  },
+  "hours": {
+    "message": "heures"
+  },
+  "minutes": {
+    "message": "minutes"
+  },
+  "bestPostTime": {
+    "message": "Meilleur moment pour publier"
+  },
+  "viralScore": {
+    "message": "Score de viralité"
+  },
+  "exportData": {
+    "message": "Exporter les données"
+  },
+  "compareVideos": {
+    "message": "Comparer les vidéos"
+  },
+  "trendingTags": {
+    "message": "Tags tendances"
+  },
+  "titleLength": {
+    "message": "Longueur du titre"
+  },
+  "descriptionLength": {
+    "message": "Longueur de la description"
+  },
+  "hasTimestamps": {
+    "message": "Contient des timestamps"
+  },
+  "hasLinks": {
+    "message": "Contient des liens"
+  },
+  "yes": {
+    "message": "Oui"
+  },
+  "no": {
+    "message": "Non"
+  },
+  "characters": {
+    "message": "caractères"
+  },
+  "performanceScore": {
+    "message": "Score de performance"
+  },
+  "close": {
+    "message": "Fermer"
+  },
+  "loading": {
+    "message": "Chargement..."
+  },
+  "error": {
+    "message": "Erreur"
+  },
+  "retry": {
+    "message": "Réessayer"
+  }
+}

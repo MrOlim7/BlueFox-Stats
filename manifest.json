@@ -3,6 +3,7 @@
   "name": "BlueFox Stats",
   "version": "0.1",
   "description": "Extension avancée de statistiques YouTube",
+  "default_locale": "fr",
   "action": {
     "default_popup": "popup/popup.html",
     "default_title": "BlueFox Stats v0.1"
